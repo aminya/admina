@@ -11,3 +11,10 @@ export function isRoot(): boolean {
   return process.getuid?.() === 0
 }
 
+/** Prepend `sudo` to the command if sudo is available */
+export function prependSudo(command: string) {
+  if (isSudo()) {
+    return `sudo ${command}`
+  }
+  return command
+}
