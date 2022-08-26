@@ -18,3 +18,24 @@ export function prependSudo(command: string) {
   }
   return command
 }
+
+/**
+ * Execute a command as root if sudo is available. Otherwise executes the command normally without sudo.
+ *
+ * @param program The program to spawn
+ * @param args The command arguments
+ * @param execOptions The options passed to `execa`. Defaults to `{ stdio: "inherit", shell: true }`
+ * @returns The execution result
+ */
+export function execRootSync(
+  program: string,
+  args: string[] = [],
+  execOptions: execa.SyncOptions = { stdio: "inherit", shell: true }
+): execa.ExecaSyncReturnValue<string> {
+  if (isSudo()) {
+    return execa.commandSync(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
+  } else {
+    return execa.sync(program, args, execOptions)
+  }
+}
+
