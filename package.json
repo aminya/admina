@@ -22,7 +22,7 @@
   },
   "targets": {
     "main": {
-      "source": "./src/index-node.ts",
+      "source": "./src/index.ts",
       "context": "node",
       "engines": {
         "node": ">=12.x"
@@ -44,7 +44,7 @@
       "isLibrary": true
     },
     "main.browser": {
-      "source": "./src/index-browser.ts",
+      "source": "./src/index.ts",
       "context": "browser",
       "engines": {
         "browsers": "> 0.5%"
@@ -55,7 +55,7 @@
       "isLibrary": true
     },
     "module.browser": {
-      "source": "./src/index-browser.ts",
+      "source": "./src/index.ts",
       "context": "browser",
       "engines": {
         "browsers": "last 2 versions"
@@ -74,8 +74,8 @@
     "LICENSE_dependencies.txt"
   ],
   "scripts": {
-    "build": "run-s clean build.tsc build.parcel build.types build.deno",
-    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module --target main.browser --target module.browser",
+    "build": "run-s clean build.tsc build.parcel build.types",
+    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module",
     "build.types": "shx cp ./dist/index.d.ts ./dist/index.node.d.ts && shx cp ./dist/index.d.ts ./dist/index.node.d.cts && shx cp ./dist/index.d.ts ./dist/browser.d.ts && shx cp ./dist/index.d.ts ./dist/index.deno.d.ts",
     "build.deno": "shx cp ./dist/index.browser.mjs ./dist/index.deno.mjs && shx cp ./dist/index.browser.mjs.map ./dist/index.deno.mjs.map",
     "build.tsc": "tsc -p ./tsconfig.json && node ./dev/tsc-mjs.mjs",
@@ -99,6 +99,10 @@
     "test.unit": "jest --runInBand"
   },
   "prettier": "prettier-config-atomic",
+  "dependencies": {
+    "execa": "^5.1.1",
+    "which": "^2.0.2"
+  },
   "devDependencies": {
     "@types/which": "^2.0.1",
     "@types/jest": "^28.1.6",
