@@ -1,0 +1,65 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - main
+      - dev
+
+jobs:
+  Test:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip test]') }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-2022
+          - ubuntu-22.04
+          - macos-12
+        node:
+          - 14
+          - 18
+        pnpm:
+          - 7
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pnpm-store
+            D:\.pnpm-store
+          key: "cache-OS:${{ matrix.os }}-node:${{ matrix.node }}-pnpm:${{ matrix.pnpm }}-${{ hashFiles('./.npmrc') }}-deps:${{ hashFiles('./package.json') }}"
+          restore-keys: |
+            "cache-OS:${{ matrix.os }}-"
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Setup Pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ matrix.pnpm }}
+
+      - name: Install and build
+        run: |
+          pnpm install
+
+      # - name: Setup SSH debugging session
+      #   uses: mxschmitt/action-tmate@v3
+
+      - name: Test
+        if: "!contains(github.event.head_commit.message, '[skip ci test]')"
+        run: |
+          pnpm run test
