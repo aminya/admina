@@ -1,0 +1,1 @@
+ - Uses [is-admin](https://github.com/sindresorhus/is-admin): MIT License Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)

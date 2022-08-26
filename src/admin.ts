@@ -1,4 +1,4 @@
-import { default as isAdminWindowsOrig } from "is-admin"
+import { default as isAdminWindowsOrig } from "./is-admin"
 import { isRoot } from "./root"
 
 /**
