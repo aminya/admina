@@ -6,7 +6,20 @@ export function hasSudo(): boolean {
   return which.sync("sudo", { nothrow: true }) !== null
 }
 
-/** Detect if the process has root privileges */
+/**
+ * Detect if the process has root privilege on Posix.
+ *
+ * @example
+ *
+ * ```js
+ * import { isRoot } from "admina"
+ *
+ * console.log(isRoot())
+ * //=> false
+ * ```
+ *
+ * @returns Whether the process is running as root.
+ */
 export function isRoot(): boolean {
   // TODO not all CI systems are root
   return process.getuid?.() === 0 || Boolean(process.env.CI)

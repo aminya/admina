@@ -27,6 +27,7 @@
   - [`execRootSync` (function)](#execrootsync-function)
   - [`execRoot` (function)](#execroot-function)
   - [`isAdminWindows` (variable)](#isadminwindows-variable)
+  - [`isAdminPosix` (variable)](#isadminposix-variable)
   - [`isAdmin` (function)](#isadmin-function)
 - [🤝 Contributing](#contributing)
 
@@ -114,9 +115,16 @@ Detect if sudo is available
 
 ### `isRoot` (function)
 
-Detect if the process has root privileges
+Detect if the process has root privilege on Posix.
 
 **returns:** boolean
+
+```js
+import { isRoot } from "admina"
+
+console.log(isRoot())
+//=> false
+```
 
 ### `isSudo` (function)
 
@@ -160,6 +168,26 @@ Asynchronously execute a command as root if sudo is available. Otherwise execute
 
 ### `isAdminWindows` (variable)
 
+Check if the process is running as administrator on Windows.
+
+```js
+import { isAdminWindows } from "admina"
+
+console.log(await isAdminWindows())
+//=> false
+```
+
+### `isAdminPosix` (variable)
+
+Detect if the process has root privilege on Posix.
+
+```js
+import { isAdminPosix } from "admina"
+
+console.log(isAdminPosix())
+//=> false
+```
+
 ### `isAdmin` (function)
 
 Detect if the code is running as admin/root
@@ -167,6 +195,13 @@ Detect if the code is running as admin/root
 On Windows, it checks for admin access, and on Posix, it checks for root access
 
 **returns:** boolean | Promise<boolean>
+
+```js
+import { isAdmin } from "admina"
+
+console.log(isAdmin())
+//=> false
+```
 
 <!-- INSERT GENERATED DOCS END -->
 
