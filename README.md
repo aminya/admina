@@ -61,49 +61,9 @@ Node CJS
 const admina = require("admina/dist/index.node.cjs")
 ```
 
-Browser
-
-```js
-import * as admina from "admina/dist/index.browser.mjs"
-```
-
-Browser Legacy
-
-```js
-import * as admina from "admina/dist/index.browser.legacy.js"
-```
-
-Deno
-
-```js
-import * as admina from "admina/dist/index.deno.mjs"
-```
-
 ## API
 
-`admina` is a drop-replacement for `path`, which is explained in [the Nodejs documentation](https://nodejs.org/api/path.html).
-
-```js
-import {
-  basename,
-  delimiter,
-  dirname,
-  extname,
-  format,
-  isAbsolute,
-  join,
-  normalize,
-  parse,
-  posix,
-  relative,
-  resolve,
-  sep,
-  toNamespacedPath,
-  win32,
-} from "admina"
-```
-
-Additionally, `admina` supports the following functions:
+`admina` supports the following functions:
 
 <!-- INSERT GENERATED DOCS START -->
 
