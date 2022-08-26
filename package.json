@@ -1,7 +1,7 @@
 {
   "name": "admina",
   "version": "0.1.0",
-  "description": "File paths library. All you need to work with paths. Tiny drop-in replacement for 'path'. Works in Node, Browser, and Deno.",
+  "description": "Detect root/admin/sudo and execute commands as it if available",
   "homepage": "https://github.com/aminya/admina",
   "repository": "https://github.com/aminya/admina",
   "license": "Apache-2.0",
@@ -89,7 +89,7 @@
     "lint.eslint": "eslint **/*.{ts,tsx,js,jsx,cjs,mjs,json,yaml} --no-error-on-unmatched-pattern --cache --cache-location ./.cache/eslint/ --fix",
     "lint.prettier": "prettier --write .",
     "prepare": "run-s build",
-    "test": "run-s build && run-p --continue-on-error --aggregate-output test.lint test.unit test.integration.node.js test.integration.node.mjs test.integration.deno",
+    "test": "run-s build && run-p --continue-on-error --aggregate-output test.lint test.unit test.integration.node.js test.integration.node.mjs",
     "test.integration.node.js": "node ./test/node-integration.js",
     "test.integration.node.mjs": "node ./test/node-integration.mjs",
     "test.integration.deno": "deno run ./test/deno-integration.ts",

@@ -11,7 +11,7 @@
   </a>
 </p>
 
-> File paths library. All you need to work with paths. Tiny drop-in replacement for 'path'. Works in Node, Browser, and Deno.
+> Detect root/admin/sudo and execute commands as it if available
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 

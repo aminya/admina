@@ -9,6 +9,9 @@ ignorePaths:
   - dist/
   - dev/cpp_vcpkg_project
 words:
+  - hasSudo
+  - isAdminWindows
+  - isAdmin
   - aarch
   - addShExt
   - aminya
