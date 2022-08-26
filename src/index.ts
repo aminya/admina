@@ -1,14 +1,20 @@
 import which from "which"
 import execa from "execa"
 
-/** Detect if sudo is available and the user has root privileges */
-export function isSudo(): boolean {
-  return (Boolean(process.env.CI) || isRoot()) && which.sync("sudo", { nothrow: true }) !== null
+/** Detect if sudo is available */
+export function hasSudo(): boolean {
+  return which.sync("sudo", { nothrow: true }) !== null
 }
 
 /** Detect if the process has root privileges */
 export function isRoot(): boolean {
-  return process.getuid?.() === 0
+  // TODO not all CI systems are root
+  return process.getuid?.() === 0 || Boolean(process.env.CI)
+}
+
+/** Detect if sudo is available and the user has root privileges */
+export function isSudo(): boolean {
+  return isRoot() && hasSudo()
 }
 
 /** Prepend `sudo` to the command if sudo is available */
