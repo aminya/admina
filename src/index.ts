@@ -1,2 +1,2 @@
-export * from "./root.js"
-export * from "./admin.js"
+export * from "./root"
+export * from "./admin"
