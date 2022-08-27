@@ -28,7 +28,7 @@
         "node": ">=12.x"
       },
       "optimize": true,
-      "includeNodeModules": true,
+      "includeNodeModules": false,
       "outputFormat": "commonjs",
       "isLibrary": true
     },
@@ -39,7 +39,7 @@
         "node": ">=16.x"
       },
       "optimize": true,
-      "includeNodeModules": true,
+      "includeNodeModules": false,
       "outputFormat": "esmodule",
       "isLibrary": true
     },
@@ -79,7 +79,7 @@
     "build.types": "shx cp ./dist/index.d.ts ./dist/index.node.d.ts && shx cp ./dist/index.d.ts ./dist/index.node.d.cts && shx cp ./dist/index.d.ts ./dist/browser.d.ts && shx cp ./dist/index.d.ts ./dist/index.deno.d.ts",
     "build.deno": "shx cp ./dist/index.browser.mjs ./dist/index.deno.mjs && shx cp ./dist/index.browser.mjs.map ./dist/index.deno.mjs.map",
     "build.tsc": "tsc -p ./tsconfig.json && node ./dev/tsc-mjs.mjs",
-    "bump": "ncu -u -x execa,numerous && pnpm update",
+    "bump": "ncu -u -x execa && pnpm update",
     "clean": "shx rm -rf dist && shx mkdir ./dist",
     "dev": "cross-env NODE_ENV=development parcel watch",
     "docs": "shx rm -rf ./README.md && pnpm exec readme --path ./dev/docs/readme.md -y && pnpm exec ts-readme --header-depth 3 && pnpm run format",
