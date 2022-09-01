@@ -1,8 +1,7 @@
-// From `is-admin`: changed `node:proces` with `process` so that the code works on Deno and Node 12
+// From `is-admin`: removed `node:proces` so that the code works on Deno and Node 12
 
 // cspell:disable
 
-import process from "process"
 import execa from "execa"
 
 // https://stackoverflow.com/a/28268802
