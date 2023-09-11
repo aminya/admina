@@ -15,9 +15,6 @@ export async function grantUserWriteAccess(path: string) {
     process.env.SUDO_USER !== undefined
   ) {
     const isDirectory = statSync(path).isDirectory()
-    await execRoot("chown", [...(isDirectory ? ["-R"] : []), process.env.SUDO_USER, path], {
-      cwd: path,
-      ...defaultExecOptions,
-    })
+    await execRoot("chown", [...(isDirectory ? ["-R"] : []), process.env.SUDO_USER, path], defaultExecOptions)
   }
 }

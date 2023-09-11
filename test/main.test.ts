@@ -25,6 +25,7 @@ describe("admina", function () {
     const file = join(tempDir, "chown test")
     await writeFile(file, "chown test")
 
+    await grantUserWriteAccess(file)
     await grantUserWriteAccess(tempDir)
   })
 
