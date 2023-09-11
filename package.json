@@ -1,6 +1,6 @@
 {
   "name": "admina",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Detect root/admin/sudo and execute commands as it if available",
   "homepage": "https://github.com/aminya/admina",
   "repository": "https://github.com/aminya/admina",
