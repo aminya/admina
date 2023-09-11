@@ -9,11 +9,9 @@ ignorePaths:
   - dist/
   - dev/cpp_vcpkg_project
 words:
-  - hasSudo
-  - isAdminWindows
-  - isAdmin
   - aarch
   - addShExt
+  - admina
   - aminya
   - applellvm
   - bazel
@@ -33,6 +31,7 @@ words:
   - deno
   - denoland
   - deps
+  - depthto
   - devel
   - dyld
   - eabi
@@ -42,6 +41,9 @@ words:
   - gcovr
   - ghes
   - Graphviz
+  - hasSudo
+  - isAdmin
+  - isAdminWindows
   - isci
   - ispathinside
   - isroot
@@ -65,7 +67,6 @@ words:
   - npmrc
   - Opencppcoverage
   - OSSDK
-  - admina
   - pnpm
   - posix
   - pwsh
@@ -75,6 +76,7 @@ words:
   - Sindre
   - Sorhus
   - Syuu
+  - tempy
   - terserrc
   - tsbuildinfo
   - ucrt
