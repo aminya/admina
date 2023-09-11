@@ -1,5 +1,5 @@
 import which from "which"
-import execa from "execa"
+import * as execa from "execa"
 
 /** Detect if sudo is available */
 export function hasSudo(): boolean {
@@ -38,6 +38,9 @@ export function prependSudo(command: string) {
   return command
 }
 
+/** Default exec options `{ stdio: "inherit", shell: true }` */
+export const defaultExecOptions: execa.SyncOptions = { stdio: "inherit", shell: true }
+
 /**
  * Execute a command as root if sudo is available. Otherwise executes the command normally without sudo.
  *
@@ -49,7 +52,7 @@ export function prependSudo(command: string) {
 export function execRootSync(
   program: string,
   args: string[] = [],
-  execOptions: execa.SyncOptions = { stdio: "inherit", shell: true }
+  execOptions: execa.SyncOptions = defaultExecOptions
 ): execa.ExecaSyncReturnValue<string> {
   if (isSudo()) {
     return execa.commandSync(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
@@ -69,11 +72,11 @@ export function execRootSync(
 export function execRoot(
   program: string,
   args: string[] = [],
-  execOptions: execa.Options = { stdio: "inherit", shell: true }
+  execOptions: execa.Options = defaultExecOptions
 ): execa.ExecaChildProcess<string> {
   if (isSudo()) {
     return execa.command(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
   } else {
-    return execa(program, args, execOptions)
+    return execa.default(program, args, execOptions)
   }
 }

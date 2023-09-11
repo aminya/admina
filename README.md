@@ -5,7 +5,9 @@
   <a href="https://github.com/aminya/admina/actions/workflows/CI.yml" target="_blank">
     <img alt="CI" src="https://github.com/aminya/admina/actions/workflows/CI.yml/badge.svg">
   </a>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://www.npmjs.com/package/admina" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/admina.svg">
+  </a>
   <a href="#" target="_blank">
     <img alt="License: Apache--2.0" src="https://img.shields.io/badge/License-Apache--2.0-yellow.svg" />
   </a>
@@ -13,9 +15,7 @@
 
 > Detect root/admin/sudo and execute commands as it if available
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
+<!-- TOC depthfrom:1 depthto:6 orderedlist:false -->
 
 - [Install](#install)
 - [Usage](#usage)
@@ -29,9 +29,11 @@
   - [`isAdminWindows` (variable)](#isadminwindows-variable)
   - [`isAdminPosix` (variable)](#isadminposix-variable)
   - [`isAdmin` (function)](#isadmin-function)
+  - [`grantUserWriteAccess` (function)](#grantuserwriteaccess-function)
+  - [`defaultExecOptions` (variable: execa.SyncOptions)](#defaultexecoptions-variable-execasyncoptions)
 - [🤝 Contributing](#contributing)
 
-<!-- /code_chunk_output -->
+<!-- /TOC -->
 
 ## Install
 
@@ -66,6 +68,10 @@ const admina = require("admina/dist/index.node.cjs")
 `admina` supports the following functions:
 
 <!-- INSERT GENERATED DOCS START -->
+
+### `isAdmin` (function)
+
+**returns:** Promise<boolean>
 
 ### `hasSudo` (function)
 
@@ -102,6 +108,10 @@ Prepend `sudo` to the command if sudo is available
 
 **returns:** string
 
+### `defaultExecOptions` (variable: execa.SyncOptions)
+
+Default exec options `{ stdio: "inherit", shell: true }`
+
 ### `execRootSync` (function)
 
 Execute a command as root if sudo is available. Otherwise executes the command normally without sudo.
@@ -110,9 +120,9 @@ Execute a command as root if sudo is available. Otherwise executes the command n
 
 - program (`string`) - The program to spawn
 - args (`string[]`) - The command arguments
-- execOptions (`execa.SyncOptions`) - The options passed to `execa`. Defaults to `{ stdio: "inherit", shell: true }`
+- execOptions (`SyncOptions<string>`) - The options passed to `execa`. Defaults to `{ stdio: "inherit", shell: true }`
 
-**returns:** execa.ExecaSyncReturnValue<string>
+**returns:** ExecaSyncReturnValue<string>
 
 ### `execRoot` (function)
 
@@ -122,9 +132,9 @@ Asynchronously execute a command as root if sudo is available. Otherwise execute
 
 - program (`string`) - The program to spawn
 - args (`string[]`) - The command arguments
-- execOptions (`execa.Options`) - The options passed to `execa`. Defaults to `{ stdio: "inherit", shell: true }`
+- execOptions (`Options<string>`) - The options passed to `execa`. Defaults to `{ stdio: "inherit", shell: true }`
 
-**returns:** execa.ExecaChildProcess<string>
+**returns:** ExecaChildProcess<string>
 
 ### `isAdminWindows` (variable)
 
@@ -162,6 +172,17 @@ import { isAdmin } from "admina"
 console.log(isAdmin())
 //=> false
 ```
+
+### `grantUserWriteAccess` (function)
+
+Give the user access to the given path (and its sub-directories if a directory). It changes the owner to the
+SUDO_USER. This allows the user to use the folder without sudo
+
+**Parameters:**
+
+- path (`string`) - The path to give the user access to
+
+**returns:** Promise<void>
 
 <!-- INSERT GENERATED DOCS END -->
 
