@@ -15,14 +15,14 @@
   "main.browser": "./dist/index.browser.legacy.js",
   "module.browser": "./dist/index.browser.mjs",
   "module.deno": "./dist/index.deno.mjs",
-  "source": "./src/index.ts",
+  "source": "./src/index.mts",
   "browser": {
     "path": "./node_modules/path-browserify",
     "process": "./node_modules/process"
   },
   "targets": {
     "main": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "node",
       "engines": {
         "node": ">=12.x"
@@ -33,7 +33,7 @@
       "isLibrary": true
     },
     "module": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "node",
       "engines": {
         "node": ">=16.x"
@@ -44,7 +44,7 @@
       "isLibrary": true
     },
     "main.browser": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "browser",
       "engines": {
         "browsers": "> 0.5%"
@@ -55,7 +55,7 @@
       "isLibrary": true
     },
     "module.browser": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "browser",
       "engines": {
         "browsers": "last 2 versions"
@@ -76,7 +76,7 @@
   "scripts": {
     "build": "run-s clean build.tsc build.parcel build.types",
     "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module",
-    "build.types": "shx cp ./dist/index.d.ts ./dist/index.node.d.ts && shx cp ./dist/index.d.ts ./dist/index.node.d.cts && shx cp ./dist/index.d.ts ./dist/browser.d.ts && shx cp ./dist/index.d.ts ./dist/index.deno.d.ts",
+    "build.types": "shx cp ./dist/index.d.mts ./dist/index.node.d.mts && shx cp ./dist/index.d.mts ./dist/index.node.d.cts && shx cp ./dist/index.d.mts ./dist/browser.d.mts && shx cp ./dist/index.d.mts ./dist/index.deno.d.mts",
     "build.deno": "shx cp ./dist/index.browser.mjs ./dist/index.deno.mjs && shx cp ./dist/index.browser.mjs.map ./dist/index.deno.mjs.map",
     "build.tsc": "tsc -p ./tsconfig.json && node ./dev/tsc-mjs.mjs",
     "bump": "ncu -u -x execa && pnpm update",

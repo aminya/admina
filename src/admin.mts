@@ -1,5 +1,5 @@
-import { default as isAdminWindowsOrig } from "./is-admin"
-import { isRoot } from "./root"
+import { default as isAdminWindowsOrig } from "./is-admin.mjs"
+import { isRoot } from "./root.mjs"
 
 /**
  * Check if the process is running as administrator on Windows.

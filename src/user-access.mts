@@ -1,4 +1,4 @@
-import { isSudo, execRoot, defaultExecOptions } from "./root"
+import { isSudo, execRoot, defaultExecOptions } from "./root.mjs"
 import { statSync } from "fs"
 import process from "process"
 

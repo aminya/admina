@@ -1,6 +1,6 @@
 import { remove } from "fs-extra"
-import { execRoot, execRootSync } from "../src/root"
-import { grantUserWriteAccess } from "../src/user-access"
+import { execRoot, execRootSync } from "../src/root.mjs"
+import { grantUserWriteAccess } from "../src/user-access.mjs"
 import { writeFile } from "fs/promises"
 import tempy from "tempy"
 import { join } from "path"
