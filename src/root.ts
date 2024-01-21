@@ -55,9 +55,10 @@ export function execRootSync(
   execOptions: execa.SyncOptions = defaultExecOptions,
 ): execa.ExecaSyncReturnValue<string> {
   if (isSudo()) {
-    return execa.commandSync(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
+    const command = getSudoCommand(program, args)
+    return execa.commandSync(command, execOptions)
   } else {
-    return execa.sync(program, args, execOptions)
+    return execa.sync(program, quote(args), execOptions)
   }
 }
 
@@ -75,8 +76,17 @@ export function execRoot(
   execOptions: execa.Options = defaultExecOptions,
 ): execa.ExecaChildProcess<string> {
   if (isSudo()) {
-    return execa.command(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
+    const command = getSudoCommand(program, args)
+    return execa.command(command, execOptions)
   } else {
-    return execa.default(program, args, execOptions)
+    return execa.default(program, quote(args), execOptions)
   }
+}
+
+function getSudoCommand(program: string, args: string[]) {
+  return `sudo ${quote([program, ...args]).join(" ")}`
+}
+
+function quote(strings: string[]) {
+  return strings.map((str) => `'${str}'`)
 }
