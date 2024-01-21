@@ -11,7 +11,7 @@ async function main() {
       } else if (file.endsWith(".d.ts")) {
         await copyFile(join(dir, file), join(dir, file.replace(".d.ts", ".d.mts")))
       }
-    })
+    }),
   )
 }
 

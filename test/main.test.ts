@@ -1,5 +1,5 @@
 import { remove } from "fs-extra"
-import { execRoot } from "../src/root"
+import { execRoot, execRootSync } from "../src/root"
 import { grantUserWriteAccess } from "../src/user-access"
 import { writeFile } from "fs/promises"
 import tempy from "tempy"
@@ -18,6 +18,15 @@ describe("admina", function () {
       await writeFile(file, "test rm")
 
       await execRoot("rm", [file])
+    }
+  })
+
+  it("execaRootSync", async () => {
+    if (process.platform === "linux" || process.platform === "darwin") {
+      const file = join(tempDir, "test rm")
+      await writeFile(file, "test rm")
+
+      execRootSync("rm", [file])
     }
   })
 
