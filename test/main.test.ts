@@ -14,8 +14,8 @@ describe("admina", function () {
 
   it("execaRoot", async () => {
     if (process.platform === "linux" || process.platform === "darwin") {
-      const file = join(tempDir, "test rm")
-      await writeFile(file, "test rm")
+      const file = join(tempDir, "test-rm")
+      await writeFile(file, "test-rm")
 
       await execRoot("rm", [file])
     }

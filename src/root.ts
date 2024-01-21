@@ -52,7 +52,7 @@ export const defaultExecOptions: execa.SyncOptions = { stdio: "inherit", shell: 
 export function execRootSync(
   program: string,
   args: string[] = [],
-  execOptions: execa.SyncOptions = defaultExecOptions
+  execOptions: execa.SyncOptions = defaultExecOptions,
 ): execa.ExecaSyncReturnValue<string> {
   if (isSudo()) {
     return execa.commandSync(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
@@ -72,7 +72,7 @@ export function execRootSync(
 export function execRoot(
   program: string,
   args: string[] = [],
-  execOptions: execa.Options = defaultExecOptions
+  execOptions: execa.Options = defaultExecOptions,
 ): execa.ExecaChildProcess<string> {
   if (isSudo()) {
     return execa.command(`sudo ${[program, ...args].map((arg) => `'${arg}'`).join(" ")}`, execOptions)
