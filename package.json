@@ -37,6 +37,17 @@
       "includeNodeModules": false,
       "outputFormat": "esmodule",
       "isLibrary": true
+    },
+    "module.deno": {
+      "source": "./src/index.mts",
+      "context": "node",
+      "engines": {
+        "deno": ">=1"
+      },
+      "optimize": false,
+      "includeNodeModules": true,
+      "outputFormat": "esmodule",
+      "isLibrary": true
     }
   },
   "files": [
@@ -47,11 +58,10 @@
     "LICENSE_dependencies.txt"
   ],
   "scripts": {
-    "build": "run-s clean build.tsc build.parcel build.types build.deno",
+    "build": "run-s clean build.tsc build.parcel build.types",
     "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build && run-s build.babel",
     "build.babel": "babel ./dist/*.cjs --out-dir dist  --out-file-extension '.cjs' --plugins @upleveled/babel-plugin-remove-node-prefix --compact --no-babelrc --source-maps true",
     "build.types": "shx cp ./dist/index.d.mts ./dist/index.node.d.mts && shx cp ./dist/index.d.mts ./dist/index.node.d.cts && shx cp ./dist/index.d.mts ./dist/index.deno.d.mts",
-    "build.deno": "shx cp ./dist/index.mjs ./dist/index.deno.mjs",
     "build.tsc": "tsc -p ./tsconfig.json",
     "bump": "ncu -u && pnpm update",
     "clean": "shx rm -rf dist && shx mkdir ./dist",
@@ -66,7 +76,7 @@
     "test": "run-s build && run-p --continue-on-error --aggregate-output test.unit test.integration.node.cjs test.integration.node.mjs",
     "test.integration.node.cjs": "node ./test/node-integration.cjs",
     "test.integration.node.mjs": "node ./test/node-integration.mjs",
-    "test.integration.deno": "cross-env DENO_NO_PACKAGE_JSON=1 deno run ./test/deno-integration.ts",
+    "test.integration.deno": "deno run ./test/deno-integration.ts",
     "test.lint": "run-p --aggregate-output --continue-on-error lint.cspell test.lint.eslint test.lint.prettier",
     "test.lint.eslint": "eslint **/*.{ts,tsx,js,jsx,cjs,mjs,json,yaml} --no-error-on-unmatched-pattern --cache --cache-location ./.cache/eslint/",
     "test.lint.prettier": "prettier . --check",
@@ -137,7 +147,8 @@
       }
     },
     "patchedDependencies": {
-      "get-stream@8.0.1": "patches/get-stream@8.0.1.patch"
+      "get-stream@8.0.1": "patches/get-stream@8.0.1.patch",
+      "merge-stream@2.0.0": "patches/merge-stream@2.0.0.patch"
     }
   }
 }
