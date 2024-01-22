@@ -15,12 +15,16 @@
   "module": "./dist/index.node.mjs",
   "module.deno": "./dist/index.deno.mjs",
   "source": "./src/index.mts",
+  "engines": {
+    "node": ">=14.x",
+    "deno": ">=1"
+  },
   "targets": {
     "main": {
       "source": "./src/index.mts",
       "context": "node",
       "engines": {
-        "node": ">=12.x"
+        "node": ">=14.x"
       },
       "optimize": true,
       "includeNodeModules": true,
@@ -31,7 +35,7 @@
       "source": "./src/index.mts",
       "context": "node",
       "engines": {
-        "node": ">=16.x"
+        "node": ">=20.x"
       },
       "optimize": true,
       "includeNodeModules": false,
@@ -84,7 +88,7 @@
   },
   "prettier": "prettier-config-atomic",
   "dependencies": {
-    "execa": "^8.0.1",
+    "execa": "^7",
     "which": "^4.0.0"
   },
   "devDependencies": {
@@ -145,9 +149,6 @@
       "allowedVersions": {
         "eslint": "*"
       }
-    },
-    "patchedDependencies": {
-      "get-stream@8.0.1": "patches/get-stream@8.0.1.patch"
     }
   }
 }
