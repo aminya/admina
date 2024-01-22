@@ -2,5 +2,5 @@
 
 import { isAdmin, isSudo } from "../dist/index.deno.mjs"
 
-isAdmin()
+await isAdmin()
 isSudo()

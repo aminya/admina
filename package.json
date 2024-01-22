@@ -66,7 +66,7 @@
     "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build && run-s build.babel",
     "build.babel": "babel ./dist/*.cjs --out-dir dist  --out-file-extension '.cjs' --plugins @upleveled/babel-plugin-remove-node-prefix --compact --no-babelrc --source-maps true",
     "build.types": "shx cp ./dist/index.d.mts ./dist/index.node.d.mts && shx cp ./dist/index.d.mts ./dist/index.node.d.cts && shx cp ./dist/index.d.mts ./dist/index.deno.d.mts",
-    "build.tsc": "tsc -p ./tsconfig.json",
+    "build.tsc": "tsc -p ./src/tsconfig.json",
     "bump": "ncu -u && pnpm update",
     "clean": "shx rm -rf dist && shx mkdir ./dist",
     "dev": "cross-env NODE_ENV=development parcel watch",
