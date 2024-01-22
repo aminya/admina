@@ -8,6 +8,11 @@ overrides:
   core-js: '*'
   babel-eslint: npm:@babel/eslint-parser
 
+patchedDependencies:
+  get-stream@8.0.1:
+    hash: c3jmqcywexw6mz7e7oy3gmeuka
+    path: patches/get-stream@8.0.1.patch
+
 dependencies:
   execa:
     specifier: ^8.0.1
@@ -4817,7 +4822,7 @@ packages:
     engines: {node: '>=16.17'}
     dependencies:
       cross-spawn: 7.0.3
-      get-stream: 8.0.1
+      get-stream: 8.0.1(patch_hash=c3jmqcywexw6mz7e7oy3gmeuka)
       human-signals: 5.0.0
       is-stream: 3.0.0
       merge-stream: 2.0.0
@@ -5129,10 +5134,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /get-stream@8.0.1:
+  /get-stream@8.0.1(patch_hash=c3jmqcywexw6mz7e7oy3gmeuka):
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
     dev: false
+    patched: true
 
   /get-symbol-description@1.0.0:
     resolution: {integrity: sha512-2EmdH1YvIQiZpltCNgkuiUnyukzxM/R6NDJX31Ke3BG1Nq5b0S2PhX59UKi9vZpPDQVdqn+1IcaAwnzTT5vCjw==}
