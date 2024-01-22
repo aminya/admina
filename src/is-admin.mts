@@ -1,4 +1,4 @@
-// From `is-admin`: removed `node:proces` so that the code works on Deno and Node 12
+// From `is-admin`: updated execa
 
 import { execa } from "execa"
 
