@@ -9,7 +9,6 @@ import {
   Options as ExecaOptions,
   ExecaChildProcess,
 } from "execa"
-import { getuid } from "node:process"
 
 /** Detect if sudo is available */
 export function hasSudo(): boolean {
@@ -32,7 +31,7 @@ export function hasSudo(): boolean {
  */
 export function isRoot(): boolean {
   // TODO not all CI systems are root
-  return getuid?.() === 0 || Boolean(process.env.CI)
+  return process.getuid?.() === 0 || Boolean(process.env.CI)
 }
 
 /** Detect if sudo is available and the user has root privileges */

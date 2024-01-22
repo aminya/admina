@@ -1,6 +1,5 @@
 import { default as isAdminWindowsOrig } from "./is-admin.mjs"
 import { isRoot } from "./root.mjs"
-import { platform } from "node:process"
 
 /**
  * Check if the process is running as administrator on Windows.
@@ -51,7 +50,7 @@ export const isAdminPosix = isRoot
  * @returns Whether the process is running as root or admin.
  */
 export function isAdmin() {
-  if (platform === "win32") {
+  if (process.platform === "win32") {
     return isAdminWindows()
   } else {
     return isRoot()

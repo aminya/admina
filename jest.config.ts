@@ -1,7 +1,7 @@
-import type { JestConfigWithTsJest } from 'ts-jest'
+import type { JestConfigWithTsJest } from "ts-jest"
 
 const jestConfig: JestConfigWithTsJest = {
-  "preset": "ts-jest/presets/js-with-ts-esm",
+  preset: "ts-jest/presets/js-with-ts-esm",
   extensionsToTreatAsEsm: [".ts", ".mts"],
   transformIgnorePatterns: [], // transform everything
   testEnvironment: "node",

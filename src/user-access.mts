@@ -1,6 +1,5 @@
 import { isSudo, execRoot, defaultExecOptions } from "./root.mjs"
 import fs from "fs"
-import process from "node:process"
 
 /**
  * Give the user access to the given path (and its sub-directories if a directory). It changes the owner to the
