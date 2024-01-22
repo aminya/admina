@@ -147,8 +147,7 @@
       }
     },
     "patchedDependencies": {
-      "get-stream@8.0.1": "patches/get-stream@8.0.1.patch",
-      "merge-stream@2.0.0": "patches/merge-stream@2.0.0.patch"
+      "get-stream@8.0.1": "patches/get-stream@8.0.1.patch"
     }
   }
 }

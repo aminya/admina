@@ -12,9 +12,6 @@ patchedDependencies:
   get-stream@8.0.1:
     hash: c3jmqcywexw6mz7e7oy3gmeuka
     path: patches/get-stream@8.0.1.patch
-  merge-stream@2.0.0:
-    hash: 56xdpgh5nyhowf2hbiue42x7hm
-    path: patches/merge-stream@2.0.0.patch
 
 dependencies:
   execa:
@@ -4891,7 +4888,7 @@ packages:
       get-stream: 6.0.1
       human-signals: 2.1.0
       is-stream: 2.0.1
-      merge-stream: 2.0.0(patch_hash=56xdpgh5nyhowf2hbiue42x7hm)
+      merge-stream: 2.0.0
       npm-run-path: 4.0.1
       onetime: 5.1.2
       signal-exit: 3.0.7
@@ -4906,7 +4903,7 @@ packages:
       get-stream: 8.0.1(patch_hash=c3jmqcywexw6mz7e7oy3gmeuka)
       human-signals: 5.0.0
       is-stream: 3.0.0
-      merge-stream: 2.0.0(patch_hash=56xdpgh5nyhowf2hbiue42x7hm)
+      merge-stream: 2.0.0
       npm-run-path: 5.2.0
       onetime: 6.0.0
       signal-exit: 4.1.0
@@ -6523,7 +6520,7 @@ packages:
     dependencies:
       '@types/node': 20.11.5
       jest-util: 29.7.0
-      merge-stream: 2.0.0(patch_hash=56xdpgh5nyhowf2hbiue42x7hm)
+      merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
 
@@ -7062,9 +7059,8 @@ packages:
     engines: {node: '>= 0.10.0'}
     dev: true
 
-  /merge-stream@2.0.0(patch_hash=56xdpgh5nyhowf2hbiue42x7hm):
+  /merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
-    patched: true
 
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
