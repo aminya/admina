@@ -16,7 +16,7 @@
   "module.deno": "./dist/index.deno.mjs",
   "source": "./src/index.mts",
   "engines": {
-    "node": ">=14.x",
+    "node": ">=12.x",
     "deno": ">=1"
   },
   "targets": {
@@ -24,7 +24,7 @@
       "source": "./src/index.mts",
       "context": "node",
       "engines": {
-        "node": ">=14.x"
+        "node": ">=12.x"
       },
       "optimize": true,
       "includeNodeModules": true,
@@ -53,6 +53,9 @@
       "outputFormat": "esmodule",
       "isLibrary": true
     }
+  },
+  "alias": {
+    "fs/promises": "./src/compat/fs/promises.mts"
   },
   "files": [
     "dist/",

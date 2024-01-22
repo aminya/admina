@@ -19,10 +19,9 @@ jobs:
           - ubuntu-22.04
           - macos-12
         node:
-          - 14
-          - 18
+          - 20
         pnpm:
-          - 7
+          - 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,9 +42,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - uses: denoland/setup-deno@v1
-        with:
-          deno-version: v1.x
+      # - uses: denoland/setup-deno@v1
+      #   with:
+      #     deno-version: v1.x
 
       - name: Setup Pnpm
         uses: pnpm/action-setup@v2
@@ -68,3 +67,11 @@ jobs:
         if: ${{ !contains(github.event.head_commit.message, '[skip ci lint]') && contains(matrix.node, '18') }}
         run: |
           pnpm run test.lint
+
+      - name: Setup Node 12
+        uses: actions/setup-node@v4
+        with:
+          node-version: 12
+      - name: Smoke Test Node 12
+        run: |
+          node ./dist/index.node.cjs
