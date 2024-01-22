@@ -28,7 +28,7 @@
         "node": ">=12.x"
       },
       "optimize": true,
-      "includeNodeModules": false,
+      "includeNodeModules": true,
       "outputFormat": "commonjs",
       "isLibrary": true
     },
@@ -75,11 +75,12 @@
   ],
   "scripts": {
     "build": "run-s clean build.tsc build.parcel build.types",
-    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module",
+    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module && run-s build.babel",
+    "build.babel": "babel ./dist --out-dir dist --plugins @upleveled/babel-plugin-remove-node-prefix --compact --no-babelrc --source-maps true",
     "build.types": "shx cp ./dist/index.d.ts ./dist/index.node.d.ts && shx cp ./dist/index.d.ts ./dist/index.node.d.cts && shx cp ./dist/index.d.ts ./dist/browser.d.ts && shx cp ./dist/index.d.ts ./dist/index.deno.d.ts",
     "build.deno": "shx cp ./dist/index.browser.mjs ./dist/index.deno.mjs && shx cp ./dist/index.browser.mjs.map ./dist/index.deno.mjs.map",
     "build.tsc": "tsc -p ./tsconfig.json && node ./dev/tsc-mjs.mjs",
-    "bump": "ncu -u -x execa && pnpm update",
+    "bump": "ncu -u && pnpm update",
     "clean": "shx rm -rf dist && shx mkdir ./dist",
     "dev": "cross-env NODE_ENV=development parcel watch",
     "docs": "shx rm -rf ./README.md && pnpm exec readme --path ./dev/docs/readme.md -y && pnpm exec ts-readme --header-depth 3 && pnpm run format",
@@ -100,15 +101,16 @@
   },
   "prettier": "prettier-config-atomic",
   "dependencies": {
-    "execa": "^5.1.1",
-    "is-admin": "^4.0.0",
+    "execa": "^8.0.1",
     "which": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.5",
     "@types/which": "^3.0.3",
+    "@upleveled/babel-plugin-remove-node-prefix": "^1.0.5",
     "cross-env": "7.0.3",
     "cspell": "^8.3.2",
     "eslint": "^8.56.0",

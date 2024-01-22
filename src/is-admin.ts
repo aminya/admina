@@ -1,8 +1,6 @@
 // From `is-admin`: removed `node:proces` so that the code works on Deno and Node 12
 
-// cspell:disable
-
-import execa from "execa"
+import { execa } from "execa"
 
 // https://stackoverflow.com/a/28268802
 async function testFltmc() {

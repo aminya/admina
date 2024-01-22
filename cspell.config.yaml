@@ -37,6 +37,8 @@ words:
   - eabi
   - esmodule
   - execa
+  - fltmc
+  - fsutil
   - ftxui
   - gcovr
   - ghes
@@ -81,6 +83,7 @@ words:
   - tsbuildinfo
   - ucrt
   - untildify
+  - upleveled
   - vbatts
   - vcpkg
   - vcvarsall
