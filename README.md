@@ -20,18 +20,19 @@
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
-  - [`hasSudo` (function)](#hassudo-function)
-  - [`isRoot` (function)](#isroot-function)
-  - [`isSudo` (function)](#issudo-function)
-  - [`prependSudo` (function)](#prependsudo-function)
-  - [`execRootSync` (function)](#execrootsync-function)
-  - [`execRoot` (function)](#execroot-function)
-  - [`isAdminWindows` (variable)](#isadminwindows-variable)
-  - [`isAdminPosix` (variable)](#isadminposix-variable)
-  - [`isAdmin` (function)](#isadmin-function)
-  - [`grantUserWriteAccess` (function)](#grantuserwriteaccess-function)
-  - [`defaultExecOptions` (variable: execa.SyncOptions)](#defaultexecoptions-variable-execasyncoptions)
-- [🤝 Contributing](#contributing)
+  - [isAdmin function](#isadmin-function)
+  - [hasSudo function](#hassudo-function)
+  - [isRoot function](#isroot-function)
+  - [isSudo function](#issudo-function)
+  - [prependSudo function](#prependsudo-function)
+  - [defaultExecOptions variable: execa.SyncOptions](#defaultexecoptions-variable-execasyncoptions)
+  - [execRootSync function](#execrootsync-function)
+  - [execRoot function](#execroot-function)
+  - [isAdminWindows variable](#isadminwindows-variable)
+  - [isAdminPosix variable](#isadminposix-variable)
+  - [isAdmin function](#isadmin-function)
+  - [grantUserWriteAccess function](#grantuserwriteaccess-function)
+- [🤝 Contributing](#-contributing)
 
 <!-- /TOC -->
 
@@ -62,6 +63,12 @@ Node CJS
 ```js
 const admina = require("admina/dist/index.node.cjs")
 ```
+
+<!--
+Deno
+```js
+import * as admina from "admina/dist/index.deno.mjs"
+``` -->
 
 ## API
 

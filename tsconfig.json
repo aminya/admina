@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "strict": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
@@ -29,5 +30,5 @@
     "outDir": "./dist"
   },
   "compileOnSave": false,
-  "include": ["./src"]
+  "include": ["./src", "./test", "./jest.config.ts"]
 }

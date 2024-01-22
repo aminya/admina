@@ -10,57 +10,45 @@
     "import": "./dist/index.node.mjs",
     "require": "./dist/index.node.cjs"
   },
+  "type": "module",
   "main": "./dist/index.node.cjs",
   "module": "./dist/index.node.mjs",
-  "main.browser": "./dist/index.browser.legacy.js",
-  "module.browser": "./dist/index.browser.mjs",
   "module.deno": "./dist/index.deno.mjs",
-  "source": "./src/index.ts",
-  "browser": {
-    "path": "./node_modules/path-browserify",
-    "process": "./node_modules/process"
+  "source": "./src/index.mts",
+  "engines": {
+    "node": ">=14.x",
+    "deno": ">=1"
   },
   "targets": {
     "main": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "node",
       "engines": {
-        "node": ">=12.x"
+        "node": ">=14.x"
       },
       "optimize": true,
-      "includeNodeModules": false,
+      "includeNodeModules": true,
       "outputFormat": "commonjs",
       "isLibrary": true
     },
     "module": {
-      "source": "./src/index.ts",
+      "source": "./src/index.mts",
       "context": "node",
       "engines": {
-        "node": ">=16.x"
+        "node": ">=20.x"
       },
       "optimize": true,
       "includeNodeModules": false,
       "outputFormat": "esmodule",
       "isLibrary": true
     },
-    "main.browser": {
-      "source": "./src/index.ts",
-      "context": "browser",
+    "module.deno": {
+      "source": "./src/index.mts",
+      "context": "node",
       "engines": {
-        "browsers": "> 0.5%"
+        "deno": ">=1"
       },
-      "optimize": true,
-      "includeNodeModules": true,
-      "outputFormat": "global",
-      "isLibrary": true
-    },
-    "module.browser": {
-      "source": "./src/index.ts",
-      "context": "browser",
-      "engines": {
-        "browsers": "last 2 versions"
-      },
-      "optimize": true,
+      "optimize": false,
       "includeNodeModules": true,
       "outputFormat": "esmodule",
       "isLibrary": true
@@ -75,11 +63,11 @@
   ],
   "scripts": {
     "build": "run-s clean build.tsc build.parcel build.types",
-    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build --target main --target module",
-    "build.types": "shx cp ./dist/index.d.ts ./dist/index.node.d.ts && shx cp ./dist/index.d.ts ./dist/index.node.d.cts && shx cp ./dist/index.d.ts ./dist/browser.d.ts && shx cp ./dist/index.d.ts ./dist/index.deno.d.ts",
-    "build.deno": "shx cp ./dist/index.browser.mjs ./dist/index.deno.mjs && shx cp ./dist/index.browser.mjs.map ./dist/index.deno.mjs.map",
-    "build.tsc": "tsc -p ./tsconfig.json && node ./dev/tsc-mjs.mjs",
-    "bump": "ncu -u -x execa && pnpm update",
+    "build.parcel": "shx rm -rf dist/node/index.js* && cross-env NODE_ENV=production parcel build && run-s build.babel",
+    "build.babel": "babel ./dist/*.cjs --out-dir dist  --out-file-extension '.cjs' --plugins @upleveled/babel-plugin-remove-node-prefix --compact --no-babelrc --source-maps true",
+    "build.types": "shx cp ./dist/index.d.mts ./dist/index.node.d.mts && shx cp ./dist/index.d.mts ./dist/index.node.d.cts && shx cp ./dist/index.d.mts ./dist/index.deno.d.mts",
+    "build.tsc": "tsc -p ./src/tsconfig.json",
+    "bump": "ncu -u && pnpm update",
     "clean": "shx rm -rf dist && shx mkdir ./dist",
     "dev": "cross-env NODE_ENV=development parcel watch",
     "docs": "shx rm -rf ./README.md && pnpm exec readme --path ./dev/docs/readme.md -y && pnpm exec ts-readme --header-depth 3 && pnpm run format",
@@ -89,8 +77,8 @@
     "lint.eslint": "eslint **/*.{ts,tsx,js,jsx,cjs,mjs,json,yaml} --no-error-on-unmatched-pattern --cache --cache-location ./.cache/eslint/ --fix",
     "lint.prettier": "prettier --write .",
     "prepare": "run-s build",
-    "test": "run-s build && run-p --continue-on-error --aggregate-output test.unit test.integration.node.js test.integration.node.mjs",
-    "test.integration.node.js": "node ./test/node-integration.js",
+    "test": "run-s build && run-p --continue-on-error --aggregate-output test.unit test.integration.node.cjs test.integration.node.mjs",
+    "test.integration.node.cjs": "node ./test/node-integration.cjs",
     "test.integration.node.mjs": "node ./test/node-integration.mjs",
     "test.integration.deno": "deno run ./test/deno-integration.ts",
     "test.lint": "run-p --aggregate-output --continue-on-error lint.cspell test.lint.eslint test.lint.prettier",
@@ -100,15 +88,17 @@
   },
   "prettier": "prettier-config-atomic",
   "dependencies": {
-    "execa": "^5.1.1",
-    "is-admin": "^4.0.0",
+    "execa": "^7",
     "which": "^4.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@parcel/transformer-typescript-tsc": "^2.11.0",
     "@types/fs-extra": "^11.0.4",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.5",
     "@types/which": "^3.0.3",
+    "@upleveled/babel-plugin-remove-node-prefix": "^1.0.5",
     "cross-env": "7.0.3",
     "cspell": "^8.3.2",
     "eslint": "^8.56.0",
@@ -125,6 +115,7 @@
     "tempy": "<3",
     "terser-config-atomic": "^1.0.0",
     "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
     "ts-readme": "^1.1.3",
     "typescript": "^5.3.3"
   },

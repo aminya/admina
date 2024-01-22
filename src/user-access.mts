@@ -1,6 +1,5 @@
-import { isSudo, execRoot, defaultExecOptions } from "./root"
-import { statSync } from "fs"
-import process from "process"
+import { isSudo, execRoot, defaultExecOptions } from "./root.mjs"
+import fs from "fs"
 
 /**
  * Give the user access to the given path (and its sub-directories if a directory). It changes the owner to the
@@ -14,7 +13,7 @@ export async function grantUserWriteAccess(path: string) {
     isSudo() &&
     process.env.SUDO_USER !== undefined
   ) {
-    const isDirectory = statSync(path).isDirectory()
+    const isDirectory = fs.statSync(path).isDirectory()
     await execRoot("chown", [...(isDirectory ? ["-R"] : []), process.env.SUDO_USER, path], defaultExecOptions)
   }
 }
