@@ -91,7 +91,7 @@
   },
   "prettier": "prettier-config-atomic",
   "dependencies": {
-    "execa": "^7",
+    "execa": "^8.0.0",
     "which": "^4.0.0"
   },
   "devDependencies": {
