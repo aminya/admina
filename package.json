@@ -91,8 +91,8 @@
   },
   "prettier": "prettier-config-atomic",
   "dependencies": {
-    "execa": "^7",
-    "which": "^4.0.0"
+    "execa": "^9.0.0",
+    "which": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
