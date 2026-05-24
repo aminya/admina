@@ -22,11 +22,8 @@ describe("admina", () => {
     await execRoot("rm", [file])
   })
 
-  it("execRoot Windows", async () => {
-    if (process.platform !== "win32") {
-      return
-    }
-    const result = await execRoot("winget.exe", ["features"])
+  it("execRoot node --version", async () => {
+    const result = await execRoot("node", ["--version"])
     expect(result.exitCode).toBe(0)
   })
 
@@ -40,19 +37,13 @@ describe("admina", () => {
     execRootSync("rm", [file])
   })
 
-  it("execRootSync Windows", () => {
-    if (process.platform !== "win32") {
-      return
-    }
-    const result = execRootSync("winget.exe", ["features"])
+  it("execRootSync node --version", () => {
+    const result = execRootSync("node", ["--version"])
     expect(result.exitCode).toBe(0)
   })
 
   it("execRootSync does not double-quote already-quoted args", () => {
-    if (process.platform !== "win32") {
-      return
-    }
-    const result = execRootSync("winget.exe", ['"features"'])
+    const result = execRootSync("node", ['"--version"'])
     expect(result.exitCode).toBe(0)
   })
 
