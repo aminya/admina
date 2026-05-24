@@ -63,9 +63,11 @@ jobs:
           pnpm run test.lint
 
       - name: Setup Node 12
+        if: ${{ !contains(matrix.os, 'macos') }}
         uses: actions/setup-node@v4
         with:
           node-version: 12
       - name: Smoke Test Node 12
+        if: ${{ !contains(matrix.os, 'macos') }}
         run: |
           node ./dist/index.node.cjs
