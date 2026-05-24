@@ -108,6 +108,7 @@
     "eslint": "^8.56.0",
     "eslint-config-atomic": "^1.20.6",
     "fs-extra": "^11.2.0",
+    "is-stream": "^3.0.0",
     "jest": "^29.7.0",
     "npm-check-updates": "^16.14.12",
     "npm-run-all2": "^6.1.1",
