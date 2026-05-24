@@ -4,10 +4,10 @@ import {
   execaCommand,
   execaCommandSync,
   execaSync,
-  SyncOptions as ExecaSyncOptions,
-  ExecaSyncReturnValue,
-  Options as ExecaOptions,
-  ExecaChildProcess,
+  type SyncOptions as ExecaSyncOptions,
+  type ExecaSyncReturnValue,
+  type Options as ExecaOptions,
+  type ExecaChildProcess,
 } from "execa"
 
 /** Detect if sudo is available */
@@ -48,7 +48,10 @@ export function prependSudo(command: string) {
 }
 
 /** Default exec options `{ stdio: "inherit", shell: true }` */
-export const defaultExecOptions: ExecaSyncOptions = { stdio: "inherit", shell: true }
+export const defaultExecOptions: ExecaSyncOptions = {
+  stdio: "inherit",
+  shell: true,
+}
 
 /**
  * Execute a command as root if sudo is available. Otherwise executes the command normally without sudo.
@@ -67,7 +70,7 @@ export function execRootSync(
     const command = getSudoCommand(program, args)
     return execaCommandSync(command, execOptions)
   } else {
-    return execaSync(program, quote(args), execOptions)
+    return execaSync(program, args, execOptions)
   }
 }
 
@@ -88,7 +91,7 @@ export function execRoot(
     const command = getSudoCommand(program, args)
     return execaCommand(command, execOptions)
   } else {
-    return execa(program, quote(args), execOptions)
+    return execa(program, args, execOptions)
   }
 }
 
@@ -97,5 +100,14 @@ function getSudoCommand(program: string, args: string[]) {
 }
 
 function quote(strings: string[]) {
-  return strings.map((str) => `'${str}'`)
+  return strings.map((str) => (isQuoted(str) ? str : `'${str}'`))
+}
+
+function isQuoted(str: string) {
+  if (str.length < 2) {
+    return false
+  }
+  const first = str[0]
+  const last = str[str.length - 1]
+  return (first === "'" && last === "'") || (first === '"' && last === '"')
 }

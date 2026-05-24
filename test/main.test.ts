@@ -5,29 +5,46 @@ import { writeFile } from "fs/promises"
 import tempy from "tempy"
 import { join } from "path"
 
-describe("admina", function () {
+describe("admina", () => {
   let tempDir: string
 
   beforeAll(() => {
     tempDir = tempy.directory()
   })
 
-  it("execaRoot", async () => {
-    if (process.platform === "linux" || process.platform === "darwin") {
-      const file = join(tempDir, "test rm")
-      await writeFile(file, "test rm")
-
-      await execRoot("rm", [file])
+  it("execaRoot Unix", async () => {
+    if (process.platform === "win32") {
+      return
     }
+    const file = join(tempDir, "test rm")
+    await writeFile(file, "test rm")
+
+    await execRoot("rm", [file])
   })
 
-  it("execaRootSync", async () => {
-    if (process.platform === "linux" || process.platform === "darwin") {
-      const file = join(tempDir, "test rm")
-      await writeFile(file, "test rm")
+  it("execRoot node --version", async () => {
+    const result = await execRoot("node", ["--version"])
+    expect(result.exitCode).toBe(0)
+  })
 
-      execRootSync("rm", [file])
+  it("execaRootSync Unix", async () => {
+    if (process.platform === "win32") {
+      return
     }
+    const file = join(tempDir, "test rm")
+    await writeFile(file, "test rm")
+
+    execRootSync("rm", [file])
+  })
+
+  it("execRootSync node --version", () => {
+    const result = execRootSync("node", ["--version"])
+    expect(result.exitCode).toBe(0)
+  })
+
+  it("execRootSync does not double-quote already-quoted args", () => {
+    const result = execRootSync("node", ['"--version"'])
+    expect(result.exitCode).toBe(0)
   })
 
   it("admina.grantUserWriteAccess", async () => {

@@ -16,12 +16,8 @@ jobs:
       matrix:
         os:
           - windows-2022
-          - ubuntu-22.04
-          - macos-12
-        node:
-          - 20
-        pnpm:
-          - 8
+          - ubuntu-24.04
+          - macos-14
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,23 +29,21 @@ jobs:
           path: |
             ~/.pnpm-store
             D:\.pnpm-store
-          key: "cache-OS:${{ matrix.os }}-node:${{ matrix.node }}-pnpm:${{ matrix.pnpm }}-${{ hashFiles('./.npmrc') }}-deps:${{ hashFiles('./package.json') }}"
+          key: "cache-OS:${{ matrix.os }}-${{ hashFiles('./.npmrc', './pnpm-lock.yaml', './package.json', './.nvmrc') }}"
           restore-keys: |
             "cache-OS:${{ matrix.os }}-"
 
+      - name: Setup Pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: ${{ matrix.node }}
+          node-version-file: .nvmrc
 
       # - uses: denoland/setup-deno@v1
       #   with:
       #     deno-version: v1.x
-
-      - name: Setup Pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ matrix.pnpm }}
 
       - name: Install and build
         run: |
@@ -64,7 +58,7 @@ jobs:
           pnpm run test
 
       - name: Lint
-        if: ${{ !contains(github.event.head_commit.message, '[skip ci lint]') && contains(matrix.node, '18') }}
+        if: ${{ !contains(github.event.head_commit.message, '[skip ci lint]') }}
         run: |
           pnpm run test.lint
 
