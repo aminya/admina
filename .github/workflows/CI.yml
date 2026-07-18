@@ -37,7 +37,7 @@ jobs:
         uses: pnpm/action-setup@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
 
@@ -64,7 +64,7 @@ jobs:
 
       - name: Setup Node 12
         if: ${{ !contains(matrix.os, 'macos') }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 12
       - name: Smoke Test Node 12
