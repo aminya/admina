@@ -19,7 +19,7 @@
     "node": ">=12.x",
     "deno": ">=1"
   },
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@12.3.4",
   "targets": {
     "main": {
       "source": "./src/index.mts",
